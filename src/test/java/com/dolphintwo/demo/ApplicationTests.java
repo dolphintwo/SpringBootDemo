@@ -17,7 +17,7 @@ public class ApplicationTests {
 
 	@Test
 	public void testSayHello(){
-		assertEquals("Hello World!",new HelloWorldController().sayHello());
+		assertEquals("Hello World!",new HelloController().sayHello());
 	}
 
 }

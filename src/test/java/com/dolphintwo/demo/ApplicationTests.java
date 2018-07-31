@@ -15,9 +15,4 @@ public class ApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void testSayHello(){
-		assertEquals("Hello World!",new HelloController().sayHello());
-	}
-
 }

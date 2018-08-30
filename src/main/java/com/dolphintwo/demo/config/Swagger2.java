@@ -1,4 +1,4 @@
-package com.dolphintwo.demo;
+package com.dolphintwo.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,10 @@ public class Swagger2 {
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")
                 .description("Test desc")
-                .termsOfServiceUrl("http://dinghui.me/")
+                .contact("dolphintwo")
+                .termsOfServiceUrl("http://www.baidu.com/")
+                .license("The Apache License, Version 2.0")
+                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .version("1.0")
                 .build();
     }

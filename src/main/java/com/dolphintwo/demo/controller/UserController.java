@@ -1,5 +1,6 @@
-package com.dolphintwo.demo;
+package com.dolphintwo.demo.controller;
 
+import com.dolphintwo.demo.entity.User;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 

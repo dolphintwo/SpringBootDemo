@@ -1,4 +1,4 @@
-package com.dolphintwo.demo;
+package com.dolphintwo.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,4 +15,10 @@ public class HelloController {
         map.addAttribute("host", "http://dinghui.me");
         return "index";
     }
+
+    @RequestMapping("/hello")
+    public String hello() throws Exception {
+        throw new Exception("发生错误");
+    }
+
 }

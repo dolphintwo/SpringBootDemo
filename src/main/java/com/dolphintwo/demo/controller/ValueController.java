@@ -1,4 +1,4 @@
-package com.dolphintwo.demo;
+package com.dolphintwo.demo.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

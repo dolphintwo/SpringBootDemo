@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 
 @Setter
 @Getter
+@Entity
 public class User {
 
     @Id
@@ -25,5 +27,13 @@ public class User {
 
     @Column(nullable = false)
     private Integer age;
+
+    public User(){}
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
 
 }

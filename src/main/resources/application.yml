@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  application:
+    name: Spring Boot Demo
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+  # REDIS (RedisProperties)
+  redis:
+    # 连接超时时间（毫秒）
+    timeout: 0
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: -1
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+server:
+  tomcat:
+    uri-encoding: UTF-8
+com:
+  dolphintwo:
+    demo:
+      name: dolphintwo
+      title: This is a SpringBoot Demo

@@ -1,16 +1,18 @@
 package com.dolphintwo.demo;
 
 import com.dolphintwo.demo.entity.User;
+import com.dolphintwo.demo.rabbit.Sender;
 import com.dolphintwo.demo.repository.UserRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,12 +23,12 @@ public class ApplicationTests {
 	private UserRepository userRepository;
 
 	@Before
-	public void setup(){
+	public void setupUser() {
 		userRepository.deleteAllUsers();
 	}
 
 	@Test
-	public void test() throws Exception {
+	public void testJpa() throws Exception {
 		// 创建10条记录
 		userRepository.save(new User("AAA", 10));
 		userRepository.save(new User("BBB", 20));
@@ -58,5 +60,31 @@ public class ApplicationTests {
 		Assert.assertEquals(9, userRepository.findAll().size());
 
 	}
+
+	@After
+	public void cleanUser() {
+		userRepository.deleteAllUsers();
+	}
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
+
+	@Test
+	public void testRedis() throws Exception {
+
+		// 保存字符串
+		stringRedisTemplate.opsForValue().set("aaa", "111");
+		Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
+		stringRedisTemplate.delete("aaa");
+	}
+
+	@Autowired
+	private Sender sender;
+
+	@Test
+	public void testRabbit() throws Exception {
+		sender.send();
+	}
+
 
 }

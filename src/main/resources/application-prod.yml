@@ -1,0 +1,17 @@
+com:
+  dolphintwo:
+    demo:
+      title: Release
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:33306/demo
+    username: root
+    password: 888888
+  redis:
+    database: 2
+    host: 127.0.0.1
+    port: 36379
+    password:
+server:
+  port: 3333

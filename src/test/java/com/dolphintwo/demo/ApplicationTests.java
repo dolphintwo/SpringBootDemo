@@ -1,7 +1,9 @@
 package com.dolphintwo.demo;
 
+import com.dolphintwo.demo.entity.Doge;
 import com.dolphintwo.demo.entity.User;
 import com.dolphintwo.demo.rabbit.Sender;
+import com.dolphintwo.demo.repository.DogeRepository;
 import com.dolphintwo.demo.repository.UserRepository;
 import org.junit.After;
 import org.junit.Assert;
@@ -86,5 +88,32 @@ public class ApplicationTests {
 		sender.send();
 	}
 
+	@Autowired
+	private DogeRepository dogeRepository;
 
+	@Before
+	public void setUpDoge() {
+		dogeRepository.deleteAll();
+	}
+
+	@Test
+	public void testMongo() throws Exception {
+
+		// 创建三个User，并验证User总数
+		dogeRepository.save(new Doge(1L, "didi", 30));
+		dogeRepository.save(new Doge(2L, "mama", 40));
+		dogeRepository.save(new Doge(3L, "kaka", 50));
+		Assert.assertEquals(3, dogeRepository.findAll().size());
+
+		// 删除一个User，再验证User总数
+		Doge d = dogeRepository.findOne(1L);
+		dogeRepository.delete(d);
+		Assert.assertEquals(2, dogeRepository.findAll().size());
+
+		// 删除一个User，再验证User总数
+		d = dogeRepository.findByName("mama");
+		dogeRepository.delete(d);
+		Assert.assertEquals(1, dogeRepository.findAll().size());
+
+	}
 }

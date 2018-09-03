@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * @author DolphinTwo
@@ -16,7 +17,7 @@ import javax.persistence.Id;
 @Setter
 @Getter
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
@@ -34,6 +35,5 @@ public class User {
         this.name = name;
         this.age = age;
     }
-
 
 }

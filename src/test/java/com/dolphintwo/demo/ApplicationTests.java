@@ -12,9 +12,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +32,7 @@ public class ApplicationTests {
 	}
 
 	@Test
+	@Transactional
 	public void testJpa() throws Exception {
 		// 创建10条记录
 		userRepository.save(new User("AAA", 10));
@@ -61,11 +64,8 @@ public class ApplicationTests {
 		// 测试findAll, 查询所有记录, 验证上面的删除是否成功
 		Assert.assertEquals(9, userRepository.findAll().size());
 
-	}
-
-	@After
-	public void cleanUser() {
 		userRepository.deleteAllUsers();
+
 	}
 
 	@Autowired
@@ -114,6 +114,26 @@ public class ApplicationTests {
 		d = dogeRepository.findByName("mama");
 		dogeRepository.delete(d);
 		Assert.assertEquals(1, dogeRepository.findAll().size());
-
 	}
+
+	@Test
+	@Rollback
+	public void testCache() throws Exception {
+
+		userRepository.save(new User("KKK", 110));
+
+		User u1 = userRepository.findByName("KKK");
+		System.out.println("第一次查询：" + u1.getAge());
+
+		User u2 = userRepository.findByName("KKK");
+		System.out.println("第二次查询：" + u2.getAge());
+
+		u1.setAge(120);
+		userRepository.save(u1);
+		User u3 = userRepository.findByName("KKK");
+		System.out.println("第三次查询：" + u3.getAge());
+
+		userRepository.delete(userRepository.findByName("KKK"));
+	}
+
 }

@@ -1,6 +1,9 @@
 package com.dolphintwo.demo.repository;
 
 import com.dolphintwo.demo.entity.User;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,8 +15,10 @@ import javax.transaction.Transactional;
  * Created by dd on 2018/8/31 10:29
  */
 
+@CacheConfig(cacheNames = "users")
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    @Cacheable(key = "#p0")
     User findByName(String name);
 
     User findByNameAndAge(String name, Integer age);
@@ -25,4 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query(value = "delete from User")
     void deleteAllUsers();
+
+    @CachePut(key = "#p0.name")
+    User save(User user);
 }

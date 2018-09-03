@@ -34,4 +34,5 @@ public class UserServiceImpl implements UserService {
     public void deleteAllUsers() {
         jdbcTemplate.update("delete from USER");
     }
+
 }

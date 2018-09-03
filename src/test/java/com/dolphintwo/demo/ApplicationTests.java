@@ -26,10 +26,21 @@ public class ApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
+
+	@Autowired
+	private Sender sender;
+
+	@Autowired
+	private DogeRepository dogeRepository;
+
 	@Before
-	public void setupUser() {
+	public void setup() {
 		userRepository.deleteAllUsers();
+		dogeRepository.deleteAll();
 	}
+
 
 	@Test
 	@Transactional
@@ -68,8 +79,6 @@ public class ApplicationTests {
 
 	}
 
-	@Autowired
-	private StringRedisTemplate stringRedisTemplate;
 
 	@Test
 	public void testRedis() throws Exception {
@@ -80,20 +89,10 @@ public class ApplicationTests {
 		stringRedisTemplate.delete("aaa");
 	}
 
-	@Autowired
-	private Sender sender;
 
 	@Test
 	public void testRabbit() throws Exception {
 		sender.send();
-	}
-
-	@Autowired
-	private DogeRepository dogeRepository;
-
-	@Before
-	public void setUpDoge() {
-		dogeRepository.deleteAll();
 	}
 
 	@Test

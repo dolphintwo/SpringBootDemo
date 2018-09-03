@@ -8,6 +8,12 @@ spring:
     url: jdbc:mysql://10.1.1.191:3306/demo
     username: root
     password: 888888
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        hbm2ddl:
+          auto: update
   redis:
     database: 2
     host: 10.1.1.191

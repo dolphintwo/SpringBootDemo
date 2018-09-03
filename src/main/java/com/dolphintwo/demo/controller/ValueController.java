@@ -1,5 +1,7 @@
 package com.dolphintwo.demo.controller;
 
+import com.dolphintwo.demo.entity.Author;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +41,13 @@ public class ValueController {
     public String showValue(){
         return "My name is "+name+", and this article's title is 《"+title+"》";
     }
+
+    @Autowired
+    private Author author;
+
+    @RequestMapping("/author")
+    public String AuthorPrint(){
+        return "author name is "+author.getName()+" and author age is "+author.getAge();
+    }
+
 }

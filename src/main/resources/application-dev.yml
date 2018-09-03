@@ -1,3 +1,6 @@
+author:
+  name: dd
+  age: 28
 com:
   dolphintwo:
     demo:
@@ -8,6 +11,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:33306/demo
     username: root
     password: 888888
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        hbm2ddl:
+          auto: update
   redis:
     database: 2
     host: 127.0.0.1
@@ -23,3 +32,4 @@ spring:
       uri: mongodb://127.0.0.1:27017/demo
 server:
   port: 1111
+  context-path:

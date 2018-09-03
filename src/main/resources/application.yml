@@ -8,12 +8,7 @@ spring:
       force: true
       charset: UTF-8
       enabled: true
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        hbm2ddl:
-          auto: update
+
   # REDIS (RedisProperties)
   redis:
     # 连接超时时间（毫秒）

@@ -33,3 +33,8 @@ spring:
 server:
   port: 1111
   context-path:
+logging:
+  file: springbootDemo.log
+  level: debug
+debug: false
+
